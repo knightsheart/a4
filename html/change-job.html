@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+  <link rel="stylesheet" href="../css/nav.css">
+  <title>Employee List</title>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul class="nav_links">
+          <li><a href="index.html">Home</a></li>
+        <li class="nav_links employees">
+          <a href="#">Employee</a>
+          <ul class="dropdown">
+            <li><a href="hire-employee.html">Hire Employee</a></li>
+            <li><a href="update-employee.html">Update Employee</a></li>
+          </ul>
+        </li>
+          <li class="nav_links jobs">
+            <a href="#">Jobs</a>
+            <ul class="dropdown">
+              <li><a href="title-job.html">Get Job Description</a></li>
+              <li><a href="change-job.html">Change Job</a></li>
+              <li><a href="create-job.html">Create Job</a></li>
+            </ul>
+          </li>
+        </ul>
+    </nav>
+   </header>
+   <table id="job-information" border="1" cellspacing="0" cellpadding="5">
+    <thead>
+      <tr>
+        <th>Job Id</th>
+        <th>Job Title</th>
+        <th>Min Salary</th>
+        <th>Max Salary</th>
+      </tr>
+    </thead>
+    <tbody id="employee-table-body">
+  <tbody>
+    <!--Add in table row and data from db-->
+  </tbody>
+</table>
+<button id="change-job-button">Change Job</button>

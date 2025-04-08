@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+  <link rel="stylesheet" href="../css/nav.css">
+  <title>Employee List</title>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul class="nav_links">
+          <li><a href="index.html">Home</a></li>
+        <li class="nav_links employees">
+          <a href="#">Employee</a>
+          <ul class="dropdown">
+            <li><a href="hire-employee.html">Hire Employee</a></li>
+            <li><a href="update-employee.html">Update Employee</a></li>
+          </ul>
+        </li>
+          <li class="nav_links jobs">
+            <a href="#">Jobs</a>
+            <ul class="dropdown">
+              <li><a href="title-job.html">Get Job Description</a></li>
+              <li><a href="change-job.html">Change Job</a></li>
+              <li><a href="create-job.html">Create Job</a></li>
+            </ul>
+          </li>
+        </ul>
+    </nav>
+   </header>
+  <h1>Employee List</h1>
+  <h2>Update Employees</h2>
+
+  <!-- Purpose: User can edit salary, phone, or email for one or more employees -->
+  <!-- If updating one employee, ask for ID -->
+  <!-- The three inputs below are for editing purposes -->
+
+  <form>
+    <div class="update-employee-form">
+      <div class="employee-personal-info">
+        <div class="horizontal-input">
+          <label for="salary-list">Salary:</label>
+          <input type="text" id="salary-list" name="salary-list" required>
+        </div>
+
+        <div class="horizontal-input">
+          <label for="email-list">Email:</label>
+          <input type="email" id="email-list" name="email-list" required>
+        </div>
+
+        <div class="horizontal-input">
+          <label for="phone-list">Phone number:</label>
+          <input type="text" id="phone-list" name="phone-list">
+        </div>
+        <br>
+      </div>
+    </div>
+  </form>
+
+  <button id="update-employee-button">Update Employee</button>
+
+  <h2>Current Employees</h2>
+
+  <table id="job-information" border="1" cellspacing="0" cellpadding="5">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Salary</th>
+        <th>Phone</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody id="employee-table-body">
+      <!-- Replace this with real data using JS or server-side rendering -->
+      <!-- Example row: -->
+      <!--
+      <tr>
+        <td>1001</td>
+        <td>$60,000</td>
+        <td>123-456-7890</td>
+        <td>employee@example.com</td>
+      </tr>
+      -->
+    </tbody>
+  </table>
+
+  <!-- Optional: Add JavaScript to fetch data -->
+  <!-- 
+  <script>
+    fetch('http://localhost:5173/api/employees')
+      .then(response => response.json())
+      .then(data => {
+        const tableBody = document.getElementById('employee-table-body');
+        data.data.forEach(emp => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${emp.id}</td>
+            <td>${emp.salary}</td>
+            <td>${emp.phone}</td>
+            <td>${emp.email}</td>
+          `;
+          tableBody.appendChild(row);
+        });
+      });
+  </script> 
+  -->
+
+</body>
+</html>

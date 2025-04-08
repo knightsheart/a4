@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+  <link rel="stylesheet" href="../css/nav.css">
+  <title>Employee Hiring Form</title>
+</head>
+<header>
+  <nav>
+    <ul class="nav_links">
+        <li><a href="index.html">Home</a></li>
+      <li class="nav_links employees">
+        <a href="#">Employee</a>
+        <ul class="dropdown">
+          <li><a href="hire-employee.html">Hire Employee</a></li>
+          <li><a href="update-employee.html">Update Employee</a></li>
+        </ul>
+      </li>
+        <li class="nav_links jobs">
+          <a href="#">Jobs</a>
+          <ul class="dropdown">
+            <li><a href="title-job.html">Get Job Description</a></li>
+            <li><a href="change-job.html">Change Job</a></li>
+            <li><a href="create-job.html">Create Job</a></li>
+          </ul>
+        </li>
+      </ul>
+  </nav>
+ </header>
+ <h1>Get Job Title</h1>
+ <h2>Enter Job Id</h2>
+ <div>
+  <form action="" method="GET">
+    <input type="text" placeholder="Enter Job ID" id="job_id" name="job_id" required/>
+    <button>Get Job</button>
+  </form>
+  <p id="id">Job id:</p>
+  <p id="tile">Job title:</p>
+ </div>
+ <script>
+  async function getTitle(){
+    try{
+      const id = document.getElementById("id");
+      const response = await fetch(`http://localhost:3000/title/${id}`);
+      const data = await response.json();
+      document.getElementById("title").textContent = data.job_id
+      id.textContent = data.job_title;
+    }
+    catch(e){
+      console.log(`Error getting job title`, e);
+    }
+  }
+ </script>

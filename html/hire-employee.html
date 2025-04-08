@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+  <link rel="stylesheet" href="../css/nav.css">
+  <title>Employee Hiring Form</title>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul class="nav_links">
+          <li><a href="index.html">Home</a></li>
+        <li class="nav_links employees">
+          <a href="#">Employee</a>
+          <ul class="dropdown">
+            <li><a href="hire-employee.html">Hire Employee</a></li>
+            <li><a href="update-employee.html">Update Employee</a></li>
+          </ul>
+        </li>
+          <li class="nav_links jobs">
+            <a href="#">Jobs</a>
+            <ul class="dropdown">
+              <li><a href="title-job.html">Get Job Description</a></li>
+              <li><a href="change-job.html">Change Job</a></li>
+              <li><a href="create-job.html">Create Job</a></li>
+            </ul>
+          </li>
+        </ul>
+    </nav>
+   </header>
+  <div class="employee-hiring-form">
+    <h1>Employee Hiring Form</h1>
+    <form>
+      <div class="employee-personal-info">
+        <div class="horizontal-input">
+          <label for="fname">First name:</label>
+          <input type="text" id="fname" name="fname" required>
+        </div>
+
+        <div class="horizontal-input">
+          <label for="lname">Last name:</label>
+          <input type="text" id="lname" name="lname" required>
+        </div>
+
+        <div class="horizontal-input">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <br>
+
+        <div class="horizontal-input">
+          <label for="phone">Phone number:</label>
+          <input type="text" id="phone" name="phone" required>
+        </div>
+
+        <div class="horizontal-input">
+          <label for="hire-date">Hire Date:</label>
+          <input type="date" id="hire-date" name="hire-date">
+        </div>
+
+        <div class="horizontal-input">
+          <label for="salary">Salary:</label>
+          <input type="text" id="salary" name="salary" required>
+        </div>
+
+        <div class="employee-dropdown">
+          <div class="dropdown-style">
+            <label>HR JOBS</label>
+            <select>
+              <!-- Populate options with HR_JOBS data -->
+              <option disabled selected>Select a job.</option>
+            </select>
+          </div>
+
+          <div class="dropdown-style">
+            <label>HR MANAGERS</label>
+            <select>
+              <!-- Populate options with HR_MANAGER data -->
+              <option disabled selected>Select a manager.</option>
+            </select>
+          </div>
+
+          <div class="dropdown-style">
+            <label>HR DEPARTMENTS</label>
+            <select>
+              <!-- Populate options with HR_DEPARTMENTS data -->
+              <option disabled selected>Select a department.</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <button id="hire-employee-button">Hire Employee</button>
+
+</body>
+</html>
