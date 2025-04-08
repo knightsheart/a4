@@ -7,17 +7,18 @@
   <link rel="stylesheet" href="../css/nav.css">
   <title>Employee Hiring Form</title>
 </head>
-<header>
-  <nav>
-    <ul class="nav_links">
+<body>
+  <header>
+    <nav>
+      <ul class="nav_links">
         <li><a href="index.html">Home</a></li>
-      <li class="nav_links employees">
-        <a href="#">Employee</a>
-        <ul class="dropdown">
-          <li><a href="hire-employee.html">Hire Employee</a></li>
-          <li><a href="update-employee.html">Update Employee</a></li>
-        </ul>
-      </li>
+        <li class="nav_links employees">
+          <a href="#">Employee</a>
+          <ul class="dropdown">
+            <li><a href="hire-employee.html">Hire Employee</a></li>
+            <li><a href="update-employee.html">Update Employee</a></li>
+          </ul>
+        </li>
         <li class="nav_links jobs">
           <a href="#">Jobs</a>
           <ul class="dropdown">
@@ -27,29 +28,38 @@
           </ul>
         </li>
       </ul>
-  </nav>
- </header>
- <h1>Get Job Title</h1>
- <h2>Enter Job Id</h2>
- <div>
-  <form action="" method="GET">
-    <input type="text" placeholder="Enter Job ID" id="job_id" name="job_id" required/>
-    <button>Get Job</button>
-  </form>
-  <p id="id">Job id:</p>
-  <p id="tile">Job title:</p>
- </div>
- <script>
-  async function getTitle(){
-    try{
-      const id = document.getElementById("id");
-      const response = await fetch(`http://localhost:3000/title/${id}`);
-      const data = await response.json();
-      document.getElementById("title").textContent = data.job_id
-      id.textContent = data.job_title;
-    }
-    catch(e){
-      console.log(`Error getting job title`, e);
-    }
-  }
- </script>
+    </nav>
+  </header>
+    <h1>Get Job Title</h1>
+    <h2>Enter Job Id</h2>
+    <div>
+      <form id="jobForm">
+        <input type="text" placeholder="Enter Job ID" id="job_id" name="job_id" required/>
+        <button type="submit">Get Job</button>
+      </form>
+      <p id="id">Job id: </p>
+      <p id="title">Job title: </p>
+    </div>
+  <script>
+    document.getElementById('jobForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const jobId = document.getElementById("job_id").value;
+      const idElement = document.getElementById("id");
+      const titleElement = document.getElementById("title");
+      
+      try {
+        const response = await fetch(`http://localhost:3000/title/${jobId}`);
+        const data = await response.json();
+        
+        idElement.textContent = `Job id: ${data.job_id || jobId}`;
+        titleElement.textContent = `Job title: ${data.job_title || 'Not Found'}`;
+      } catch(e) {
+        console.error('Error getting job title', e);
+        idElement.textContent = `Job id: ${jobId}`;
+        titleElement.textContent = 'Job title: Error fetching data';
+      }
+    });
+  </script>
+</body>
+</html>
