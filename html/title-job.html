@@ -34,30 +34,30 @@
     <h2>Enter Job Id</h2>
     <div>
       <form id="jobForm">
-        <input type="text" placeholder="Enter Job ID" id="job_id" name="job_id" required/>
+        <input type="text" placeholder="Enter Job ID" id="jobId" name="jobId" required/>
         <button type="submit">Get Job</button>
       </form>
       <p id="id">Job id: </p>
       <p id="title">Job title: </p>
     </div>
   <script>
-    document.getElementById('jobForm').addEventListener('submit', async function(e) {
+    var form = document.querySelector("form");
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      
-      const jobId = document.getElementById("job_id").value;
-      const idElement = document.getElementById("id");
-      const titleElement = document.getElementById("title");
-      
-      try {
-        const response = await fetch(`http://localhost:3000/title/${jobId}`);
+      var data = new FormData(form);
+      const jobId = document.getElementById("jobId");
+      const id = document.getElementById("id");
+      const title = document.getElementById("title");
+      try{
+        const response = await fetch(`http://localhost:3000/api/job/job-description/${jobId.value}`);
         const data = await response.json();
-        
-        idElement.textContent = `Job id: ${data.job_id || jobId}`;
-        titleElement.textContent = `Job title: ${data.job_title || 'Not Found'}`;
-      } catch(e) {
-        console.error('Error getting job title', e);
-        idElement.textContent = `Job id: ${jobId}`;
-        titleElement.textContent = 'Job title: Error fetching data';
+        id.textContent = jobId.value;
+        title.textContent = data.jobTitle;
+      }
+      catch(e){
+        console.error(e);
+        id.textContent = jobId.value;
+        title.textContent = "Job title not found.";
       }
     });
   </script>

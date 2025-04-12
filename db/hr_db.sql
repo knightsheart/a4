@@ -4,22 +4,22 @@ nocycle;
 /
 
 -- Procedure to insert a new employee
-create or replace procedure employee_hire_sp (
-   p_dept_id in number,
-   p_salary  in number
-) is
-begin
-   insert into employees (
-      employee_id,
-      dept_id,
-      salary
-   ) values ( employeeid_seq.nextval,
-              p_dept_id,
-              p_salary );
+CREATE OR REPLACE PROCEDURE employee_hire_sp ( 
+ p_first_name VARCHAR2, 
+ p_last_name VARCHAR2, 
+ p_email VARCHAR2, 
+ p_salary NUMBER, 
+ p_hire_date DATE, 
+ p_phone VARCHAR2, 
+ p_job_id VARCHAR2, 
+ p_manager_id NUMBER, 
+ p_department_id NUMBER ) 
+AS 
+BEGIN 
+ INSERT INTO HR_EMPLOYEES ( EMPLOYEE_ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, MANAGER_ID, DEPARTMENT_ID ) 
+ VALUES ( HR_EMPLOYEES_SEQ.NEXTVAL, p_first_name, p_last_name, p_email, p_phone, p_hire_date, p_job_id, p_salary, p_manager_id, p_department_id );  
 
-   commit;
-end;
-/
+COMMIT; END employee_hire_sp; 
 
 -- Test employee_hire_sp
 begin

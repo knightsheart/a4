@@ -31,18 +31,39 @@
     </nav>
    </header>
 <h2>Enter Job Information</h2>
-<form>
+<form action="/api/job/create-job">
   <div class="new-job-form">
     <label for="new-job-id">Job Id:</label>
-    <input type="number"><br><br>
+    <input type="text" name="jobId"><br><br>
     <label for="new-job-title">Job Title:</label>
-    <input type="text"><br><br>
+    <input type="text" name="jobTitle"><br><br>
     <label for="minimum-salary">Minimum Salary:</label>
-    <input type="number" id="minimum-salary" name="minimum-salary"><br><br>
-    <label for="maximum-salary">Maximum Salary</label>
-    <input type="number" id="maximum-salary" name="maximum-salary"><br><br>
+    <input type="number" name="minSalary"><br><br>
+    <label for="maximum-salary" >Maximum Salary</label>
+    <input type="number" name="maxSalary"><br><br>
   </div>
+  <button type="submit">Create Job</button>
 </form>
-<!--Once clicked will execute the create job procedure based on input above-->
-<button id="create-job-button">Create Job</button>
-</template>
+<script>
+  const form = document.querySelector("form");
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    var data = new FormData(form);
+    fetch('http://localhost:3000/api/job/create-job', {
+      method: "POST",
+      body: data,
+      headers: {
+      'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        jobId: data.jobId,
+        jobTitle: data.jobTitle,
+        minSalary: data.minSalary,
+        maxSalary: data.maxSalary
+      })
+    })
+    .then(res => res.text())
+    .catch(e => console.log(e));
+  });
+</script>
+</body>

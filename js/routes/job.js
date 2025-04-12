@@ -1,11 +1,16 @@
-import express from 'express';
-import { getConnection } from '../../db/database.js';
-import oracledb from 'oracledb';
-
+const express = require('express');
+const { getConnection } = require('../database');
+var bodyParser = require('body-parser');
+const oracledb = require('oracledb')
 const router = express.Router();
 
+
+//Middle ware
+router.use(express.json());
+router.use(express.urlencoded({extended: true}));
+
 // GET job title by job ID
-router.get('/api/job-description/:id', async (req, res) => {
+router.get('/job-description/:id', async (req, res) => {
     try {
         const conn = await getConnection();
         const result = await conn.execute(
@@ -23,18 +28,18 @@ router.get('/api/job-description/:id', async (req, res) => {
 });
 
 // POST to create a new job
-router.post('/api/create-job', async (req, res) => {
+router.post('/create-job', async (req, res) => {
+  if(req.body){
     const { jobId, jobTitle, minSalary, maxSalary } = req.body;
-
     try {
         const conn = await getConnection();
         await conn.execute(
-            `BEGIN new_job(:job_id, :title, :min_sal, :max_sal); END;`,
+            `BEGIN new_job(:p_job_id, :p_job_title, :p_min_salary, :p_max_salary); END;`,
             {
-                job_id: jobId,
-                title: jobTitle,
-                min_sal: minSalary,
-                max_sal: maxSalary
+                p_job_id: jobId,
+                p_job_title: jobTitle,
+                p_min_salary: minSalary,
+                p_max_salary: maxSalary
             },
             { autoCommit: true }
         );
@@ -43,6 +48,10 @@ router.post('/api/create-job', async (req, res) => {
         console.error('❌ Job Creation Error:', error.message);
         res.status(500).json({ error: error.message });
     }
-});
+  }
+  else{
+    res.status(400).send("No body data received");
+  }
+})
 
-export default router;
+module.exports = router;

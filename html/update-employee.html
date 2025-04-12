@@ -33,11 +33,7 @@
   <h1>Employee List</h1>
   <h2>Update Employees</h2>
 
-  <!-- Purpose: User can edit salary, phone, or email for one or more employees -->
-  <!-- If updating one employee, ask for ID -->
-  <!-- The three inputs below are for editing purposes -->
-
-  <form>
+  <form action="">
     <div class="update-employee-form">
       <div class="employee-personal-info">
         <div class="horizontal-input">
@@ -58,8 +54,7 @@
       </div>
     </div>
   </form>
-
-  <button id="update-employee-button">Update Employee</button>
+  <button type="submit">Update Employee</button>
 
   <h2>Current Employees</h2>
 
@@ -73,39 +68,10 @@
       </tr>
     </thead>
     <tbody id="employee-table-body">
-      <!-- Replace this with real data using JS or server-side rendering -->
-      <!-- Example row: -->
-      <!--
-      <tr>
-        <td>1001</td>
-        <td>$60,000</td>
-        <td>123-456-7890</td>
-        <td>employee@example.com</td>
-      </tr>
-      -->
     </tbody>
   </table>
-
-  <!-- Optional: Add JavaScript to fetch data -->
-  <!-- 
   <script>
-    fetch('http://localhost:5173/api/employees')
-      .then(response => response.json())
-      .then(data => {
-        const tableBody = document.getElementById('employee-table-body');
-        data.data.forEach(emp => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td>${emp.id}</td>
-            <td>${emp.salary}</td>
-            <td>${emp.phone}</td>
-            <td>${emp.email}</td>
-          `;
-          tableBody.appendChild(row);
-        });
-      });
-  </script> 
-  -->
-
+    // No backend api for this so...
+  </script>
 </body>
 </html>

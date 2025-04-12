@@ -32,16 +32,16 @@
    </header>
   <div class="employee-hiring-form">
     <h1>Employee Hiring Form</h1>
-    <form>
+    <form method="POST">
       <div class="employee-personal-info">
         <div class="horizontal-input">
           <label for="fname">First name:</label>
-          <input type="text" id="fname" name="fname" required>
+          <input type="text" id="fname" name="firstName" required>
         </div>
 
         <div class="horizontal-input">
           <label for="lname">Last name:</label>
-          <input type="text" id="lname" name="lname" required>
+          <input type="text" id="lname" name="lastName" required>
         </div>
 
         <div class="horizontal-input">
@@ -58,7 +58,7 @@
 
         <div class="horizontal-input">
           <label for="hire-date">Hire Date:</label>
-          <input type="date" id="hire-date" name="hire-date">
+          <input type="date" id="hire-date" name="hireDate">
         </div>
 
         <div class="horizontal-input">
@@ -70,7 +70,6 @@
           <div class="dropdown-style">
             <label>HR JOBS</label>
             <select>
-              <!-- Populate options with HR_JOBS data -->
               <option disabled selected>Select a job.</option>
             </select>
           </div>
@@ -78,7 +77,6 @@
           <div class="dropdown-style">
             <label>HR MANAGERS</label>
             <select>
-              <!-- Populate options with HR_MANAGER data -->
               <option disabled selected>Select a manager.</option>
             </select>
           </div>
@@ -86,16 +84,41 @@
           <div class="dropdown-style">
             <label>HR DEPARTMENTS</label>
             <select>
-              <!-- Populate options with HR_DEPARTMENTS data -->
               <option disabled selected>Select a department.</option>
             </select>
           </div>
         </div>
       </div>
+      <button type="submit">Hire Employee</button>
     </form>
   </div>
-
-  <button id="hire-employee-button">Hire Employee</button>
-
+  <script>
+    const form = document.querySelector("form");
+    form.addEventListener((e) => {
+      e.preventDefault();
+      var data = new FormData(form);
+      fetch('https://localhost:3000/api/employee/hire-employee', {
+        method: "POST",
+        body:data,
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email,
+          salary: data.salary,
+          hireDate: data.hireDate,
+          phone: data.phone,
+          jobId: data.jobId,
+          managerId: data.managerId,
+          departmentId: data.departmentId
+        })
+      })
+      .then(res => res.text())
+      .then(txt => alert(txt))
+      .catch(e => console.log(e));
+    });
+  </script>
 </body>
 </html>
