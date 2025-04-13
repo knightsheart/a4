@@ -44,26 +44,63 @@
   </div>
   <button type="submit">Create Job</button>
 </form>
+<p id="message"></p>
 <script>
   const form = document.querySelector("form");
   form.addEventListener('submit', (e) => {
+    const jobId = form.elements.jobId.value;
+    const jobTitle = form.elements.jobTitle.value;
+    const minSalary = form.elements.minSalary.value;
+    const maxSalary = form.elements.maxSalary.value;
     e.preventDefault();
-    var data = new FormData(form);
     fetch('http://localhost:3000/api/job/create-job', {
       method: "POST",
-      body: data,
       headers: {
       'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        jobId: data.jobId,
-        jobTitle: data.jobTitle,
-        minSalary: data.minSalary,
-        maxSalary: data.maxSalary
+        jobId: jobId,
+        jobTitle: jobTitle,
+        minSalary: minSalary,
+        maxSalary: maxSalary
       })
     })
-    .then(res => res.text())
-    .catch(e => console.log(e));
+    .then(res => {
+      res.json()
+  })
+    .catch(e => {
+      console.log(e)
   });
+  });
+
+  function handleSubmit(){
+      const form = document.querySelector("form");
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const jobId = form.elements.jobId.value;
+        const jobTitle = form.elements.jobTitle.value;
+        const minSalary = form.elements.minSalary.value;
+        const maxSalary = form.elements.maxSalary.value;
+        fetch('http://localhost:3000/api/job/create-job', {
+          method: "POST",
+          headers: {
+          'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            job_id: jobId,
+            job_title: jobTitle,
+            min_salary: minSalary,
+            max_salary: maxSalary
+          })
+        })
+        .then(res => {
+          res.json()
+      })
+        .catch(e => {
+          console.log(e)
+      });
+    });
+  }
+  handleSubmit();
 </script>
 </body>

@@ -36,28 +36,28 @@
   <form action="">
     <div class="update-employee-form">
       <div class="employee-personal-info">
+        <div clas="horizontal-input">
+          <label for="employee">Employee Id</label>
+          <input type="text" name="employeeId" required>
+        </div>
         <div class="horizontal-input">
           <label for="salary-list">Salary:</label>
-          <input type="text" id="salary-list" name="salary-list" required>
+          <input type="text" name="salary" required>
         </div>
-
         <div class="horizontal-input">
           <label for="email-list">Email:</label>
-          <input type="email" id="email-list" name="email-list" required>
+          <input type="text" name="email" required>
         </div>
-
         <div class="horizontal-input">
           <label for="phone-list">Phone number:</label>
-          <input type="text" id="phone-list" name="phone-list">
+          <input type="text" name="phone">
         </div>
         <br>
       </div>
     </div>
+    <button type="submit">Update Employee</button>
   </form>
-  <button type="submit">Update Employee</button>
-
   <h2>Current Employees</h2>
-
   <table id="job-information" border="1" cellspacing="0" cellpadding="5">
     <thead>
       <tr>
@@ -71,7 +71,56 @@
     </tbody>
   </table>
   <script>
-    // No backend api for this so...
-  </script>
+    document.addEventListener('DOMContentLoaded', () => {
+      fetch('http://localhost:3000/api/employee/table')
+        .then(res => res.json())
+        .then(data => {
+          const table = document.getElementById("employee-table-body");
+          table.innerHTML = "";
+          data.forEach(row => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = 
+            `<td>${row.EMPLOYEE_ID}</td>
+             <td>${row.SALARY}</td>
+             <td>${row.PHONE_NUMBER}</td>
+             <td>${row.EMAIL}</td>`
+            table.appendChild(tr);
+          });
+        })
+        .catch(e => {
+          console.error(e);
+        });
+    });
+
+    function handleSubmit(){
+      const form = document.querySelector("form");
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const employeeId = form.elements.employeeId.value;
+        const salary = form.elements.salary.value;
+        const phone = form.elements.phone.value;
+        const email = form.elements.email.value;
+        fetch('http://localhost:3000/api/employee/update-employee', {
+          method: "POST",
+          headers: {
+          'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            employee_id: employeeId,
+            salary: salary,
+            phone_number: phone,
+            email: email
+          })
+        })
+        .then(res => {
+          res.json()
+      })
+        .catch(e => {
+          console.log(e)
+      });
+    });
+  }
+  handleSubmit();
+</script>
 </body>
 </html>

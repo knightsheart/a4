@@ -30,6 +30,20 @@
         </ul>
     </nav>
    </header>
+   <h1>Change Job</h1>
+   <h2>Edit Job Details</h2>
+   <form>
+    <label>Job Id</label>
+    <input type="text" name="jobId" required>
+    <label>Job Title</label>
+    <input type="text" name="jobTitle">
+    <label>Min Salary</label>
+    <input type="text" name="minSalary">
+    <label>Max Salary</label>   
+    <input type="text" name="maxSalary">
+    <button id="change-job-button">Change Job</button>
+   </form>
+   <br>
    <table id="job-information" border="1" cellspacing="0" cellpadding="5">
     <thead>
       <tr>
@@ -41,7 +55,58 @@
     </thead>
     <tbody id="employee-table-body">
   <tbody>
-    <!--No backend api for this so...-->
   </tbody>
 </table>
-<button id="change-job-button">Change Job</button>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  fetch('http://localhost:3000/api/job/table')
+    .then(res => res.json())
+    .then(data => {
+      const table = document.getElementById("employee-table-body");
+      table.innerHTML = "";
+      data.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = 
+        `<td>${row.JOB_ID}</td>
+         <td>${row.JOB_TITLE}</td>
+         <td>${row.MIN_SALARY}</td>
+         <td>${row.MAX_SALARY}</td>`
+        table.appendChild(tr);
+      });
+    })
+    .catch(e => {
+      console.error(e);
+    });
+});
+
+function handleSubmit(){
+  const form = document.querySelector("form");
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const jobId = form.elements.jobId.value;
+        const jobTitle = form.elements.jobTitle.value;
+        const minSalary = form.elements.minSalary.value;
+        const maxSalary = form.elements.maxSalary.value;
+        fetch('http://localhost:3000/api/job/change-job', {
+          method: "POST",
+          headers: {
+          'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            jobId: jobId,
+            jobTitle: jobTitle,
+            minSalary: minSalary,
+            maxSalary: maxSalary
+          })
+        })
+        .then(res => {
+          res.json()
+      })
+        .catch(e => {
+          console.log(e)
+      });
+    });
+  }
+  handleSubmit();
+</script>
+</body>

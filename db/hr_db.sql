@@ -21,6 +21,8 @@ BEGIN
 
 COMMIT; END employee_hire_sp; 
 
+BEGIN Update_Employee_Info(101, 5500, '164578229090', 'updatemail@gmail.com'); END; / 
+
 -- Test employee_hire_sp
 begin
    employee_hire_sp(

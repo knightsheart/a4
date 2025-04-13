@@ -48,9 +48,7 @@
           <label for="email">Email:</label>
           <input type="email" id="email" name="email" required>
         </div>
-
         <br>
-
         <div class="horizontal-input">
           <label for="phone">Phone number:</label>
           <input type="text" id="phone" name="phone" required>
@@ -60,41 +58,16 @@
           <label for="hire-date">Hire Date:</label>
           <input type="date" id="hire-date" name="hireDate">
         </div>
-
         <div class="horizontal-input">
           <label for="salary">Salary:</label>
           <input type="text" id="salary" name="salary" required>
         </div>
-
-        <div class="employee-dropdown">
-          <div class="dropdown-style">
-            <label>HR JOBS</label>
-            <select>
-              <option disabled selected>Select a job.</option>
-            </select>
-          </div>
-
-          <div class="dropdown-style">
-            <label>HR MANAGERS</label>
-            <select>
-              <option disabled selected>Select a manager.</option>
-            </select>
-          </div>
-
-          <div class="dropdown-style">
-            <label>HR DEPARTMENTS</label>
-            <select>
-              <option disabled selected>Select a department.</option>
-            </select>
-          </div>
-        </div>
-      </div>
       <button type="submit">Hire Employee</button>
     </form>
   </div>
   <script>
     const form = document.querySelector("form");
-    form.addEventListener((e) => {
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
       var data = new FormData(form);
       fetch('https://localhost:3000/api/employee/hire-employee', {
